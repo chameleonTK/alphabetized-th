@@ -16,6 +16,7 @@ from torchtext import data
 from torchtext import datasets
 import torchtext.vocab as vocab
 
+import wandb
 from tqdm import tqdm_notebook
 
 class Experiment:
