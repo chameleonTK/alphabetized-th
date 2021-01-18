@@ -4,3 +4,4 @@ datasets/**/*.csv
 datasets/**/*.jsonl
 datasets/**/*.tsv
 wv/*
+models/*.pt

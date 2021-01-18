@@ -2,8 +2,9 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F
 
+from dan import DAN
 
-class DAN(nn.Module):
+class DANXnli(DAN):
 
     def __init__(self,
                  n_embed=10000,
@@ -12,7 +13,13 @@ class DAN(nn.Module):
                  d_out=2,
                  dp=0.2,
                  embed_weight=None):
-        super(DAN, self).__init__()
+        super(DANXnli, self).__init__()
+
+        self.n_embed = n_embed
+        self.d_embed = d_embed
+        self.d_hidden = d_hidden
+        self.d_out = d_out
+        self.dp = dp
 
         self.device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 
@@ -32,9 +39,12 @@ class DAN(nn.Module):
         self.fc2 = nn.Linear(d_hidden, d_out)
 
     def set_embedding(self, embed_weight, n_embed=10000, d_embed=300):
-      self.embed = nn.Embedding(n_embed, d_embed)
-      self.embed.weight.data.copy_(embed_weight)
-      self.embed.weight.requires_grad = False
+        self.n_embed = n_embed
+        self.d_embed = d_embed
+    
+        self.embed = nn.Embedding(n_embed, d_embed)
+        self.embed.weight.data.copy_(embed_weight)
+        self.embed.weight.requires_grad = False
 
     def forward(self, batch):
         text1 = batch.sentence1
@@ -57,3 +67,16 @@ class DAN(nn.Module):
         x = self.fc2(x)
 
         return x
+
+    @staticmethod
+    def load_model(model_path):
+        checkpoint = torch.load(model_path)
+        newmodel = DANXnli(n_embed=checkpoint["n_embed"], 
+                    d_embed=checkpoint["d_embed"], 
+                    d_hidden=checkpoint["d_hidden"],
+                    d_out=checkpoint["d_out"],
+                    dp=checkpoint["dp"])
+        newmodel.load_state_dict(checkpoint["model_state_dict"])
+        newmodel.eval()
+
+        return newmodel

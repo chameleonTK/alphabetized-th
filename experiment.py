@@ -159,7 +159,7 @@ class Experiment:
                 
                 if log:
                     wandb.log({'iter': iterations, 'epoch': epoch, 'train_loss': loss.item()})                
-                    
+
                 if iterations > 0 and iterations % dev_every == 0:
                     acc, val_loss = self.evaluate(test_iter, model)
                     _save_ckp = '*'

@@ -47,7 +47,7 @@ class BasicExperiment(Experiment):
         word2vec_vectors = []
         for token, idx in tqdm_notebook(TEXT.vocab.stoi.items()):
             if token in wv.wv.vocab.keys():
-                word2vec_vectors.append(torch.FloatTensor(wv[token]))
+                word2vec_vectors.append(torch.FloatTensor(wv[token].copy()))
             else:
                 word2vec_vectors.append(torch.zeros(W2V_SIZE))
                 
@@ -80,6 +80,8 @@ class BasicExperiment(Experiment):
         last_val_iter = 0
         train_loss = 0
         start = time.time()
+
+        return model
 
         for epoch in range(args.epochs):
             train_iter.init_epoch()
@@ -120,9 +122,10 @@ class BasicExperiment(Experiment):
                     
                     if log:
                         wandb.log({'iter': iterations, 'epoch': epoch, 'val_loss': val_loss, 'acc': acc})
-                        
+
                     train_loss = 0
                     last_val_iter = iterations
+        return model
 
 if __name__ == "__main__":
     
@@ -138,4 +141,10 @@ if __name__ == "__main__":
     exp = BasicExperiment()
     args = exp.get_default_arguments("demo")
     args.epochs = 1
-    exp.train("demo", args, fnt_tokenizer, wv)
+    model = exp.train("demo", args, fnt_tokenizer, wv)
+    model.save_model("./models/demo.pt")
+
+    newmodel = DAN.load_model("./models/demo.pt")
+
+    
+    # print(newmodel, newmodel.fc2.weight, model.fc2.weight)

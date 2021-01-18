@@ -3,7 +3,7 @@ from torchtext import datasets
 import torchtext.vocab as vocab
 
 import torch.optim as optim
-from dan_xnli import DAN
+from dan_xnli import DANXnli as DAN
 
 import time
 from tqdm import tqdm as tqdm_notebook
@@ -92,3 +92,9 @@ if __name__ == "__main__":
 
     _cnt = 0
     model = exp.finetune("word_en", args, model, wv.wv, _tokenizer(tokenizer.wordTokenize))
+
+    model.save_model("./models/demo.pt")
+    newmodel = DAN.load_model("./models/demo.pt")
+
+    
+    # print(newmodel, newmodel.fc2.weight, model.fc2.weight)

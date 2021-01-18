@@ -14,6 +14,12 @@ class DAN(nn.Module):
                  embed_weight=None):
         super(DAN, self).__init__()
 
+        self.n_embed = n_embed
+        self.d_embed = d_embed
+        self.d_hidden = d_hidden
+        self.d_out = d_out
+        self.dp = dp
+
         self.device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 
         self.embed = nn.Embedding(n_embed, d_embed)
@@ -47,3 +53,26 @@ class DAN(nn.Module):
         x = self.fc2(x)
 
         return x
+
+    def save_model(self, model_path):
+        torch.save({
+            "model_state_dict": self.state_dict(),
+            "n_embed": self.n_embed,
+            "d_embed": self.d_embed,
+            "d_hidden":self.d_hidden,
+            "d_out": self.d_out,
+            "dp": self.dp,
+        }, model_path)
+
+    @staticmethod
+    def load_model(model_path):
+        checkpoint = torch.load(model_path)
+        newmodel = DAN(n_embed=checkpoint["n_embed"], 
+                    d_embed=checkpoint["d_embed"], 
+                    d_hidden=checkpoint["d_hidden"],
+                    d_out=checkpoint["d_out"],
+                    dp=checkpoint["dp"])
+        newmodel.load_state_dict(checkpoint["model_state_dict"])
+        newmodel.eval()
+
+        return newmodel
