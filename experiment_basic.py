@@ -13,12 +13,13 @@ from gensim.models import FastText
 import tokenizer as tkn
 
 from experiment import Experiment
+import wandb
 
 class BasicExperiment(Experiment):
     def __init__(self):
         super().__init__()
 
-    def train(self, mode, args, tokenizer, wv):
+    def train(self, mode, args, tokenizer, wv, log=False):
         device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 
         TEXT = data.Field(sequential=True, tokenize=tokenizer, lower=True)
@@ -103,7 +104,8 @@ class BasicExperiment(Experiment):
                     epoch, args.batch_size * (batch_idx + 1), len(train), loss.item(),
                             train_loss / (iterations - last_val_iter)), end='')
 
-                
+                if log:
+                    wandb.log({'iter': iterations, 'epoch': epoch, 'train_loss': loss.item()})                
                 if iterations > 0 and iterations % args.dev_every == 0:
                     acc, val_loss = self.evaluate(test_iter, model)
                     _save_ckp = '*'
@@ -116,6 +118,9 @@ class BasicExperiment(Experiment):
                             val_loss, acc, best_acc, (time.time() - start) / 60,
                             _save_ckp))
                     
+                    if log:
+                        wandb.log({'iter': iterations, 'epoch': epoch, 'val_loss': val_loss, 'acc': acc})
+                        
                     train_loss = 0
                     last_val_iter = iterations
 

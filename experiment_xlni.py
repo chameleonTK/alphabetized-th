@@ -19,7 +19,7 @@ class XLNIExperiment(Experiment):
         super().__init__()
 
     # Pre-trained
-    def pretrain(self, mode, args, wv, tokenizer, full_data=False):
+    def pretrain(self, mode, args, wv, tokenizer, full_data=False, log=False):
         args.path = './datasets/MNLI/'
         args.train_path = 'mnli_train.csv'
         args.test_path = 'mnli_dev.csv'
@@ -35,12 +35,12 @@ class XLNIExperiment(Experiment):
         d_embed = embed_weight.shape[1]
 
         model = DAN(n_embed=n_embed, d_embed=d_embed, d_hidden=256, d_out=d_out, dp=0.2, embed_weight=embed_weight)
-        model = self.trainDAN(model, train_iter, test_iter, epochs=args.epochs, dev_every=args.dev_every)
+        model = self.trainDAN(model, train_iter, test_iter, epochs=args.epochs, dev_every=args.dev_every, log=log)
 
         return model
 
     # Fine-tune
-    def finetune(self, mode, args, model, wv, tokenizer):
+    def finetune(self, mode, args, model, wv, tokenizer, log=False):
         args.path = './datasets/XNLI/'
         args.train_path = 'xnli_dev.csv'
         args.test_path = 'xnli_test.csv'
@@ -54,7 +54,7 @@ class XLNIExperiment(Experiment):
 
         model.set_embedding(embed_weight, n_embed=n_embed, d_embed=d_embed)
 
-        model = self.trainDAN(model, train_iter, test_iter, epochs=args.epochs, dev_every=args.dev_every)
+        model = self.trainDAN(model, train_iter, test_iter, epochs=args.epochs, dev_every=args.dev_every, log=log)
 
         return model
 

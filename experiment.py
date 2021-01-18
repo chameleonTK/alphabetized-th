@@ -157,6 +157,9 @@ class Experiment:
                     epoch, (batch_idx + 1), len(train_iter), loss.item(),
                             train_loss / (iterations - last_val_iter)), end='')
                 
+                if log:
+                    wandb.log({'iter': iterations, 'epoch': epoch, 'train_loss': loss.item()})                
+                    
                 if iterations > 0 and iterations % dev_every == 0:
                     acc, val_loss = self.evaluate(test_iter, model)
                     _save_ckp = '*'
@@ -170,6 +173,9 @@ class Experiment:
                             val_loss, acc, best_acc, (time.time() - start) / 60,
                             _save_ckp))
         
+                    if log:
+                        wandb.log({'iter': iterations, 'epoch': epoch, 'val_loss': val_loss, 'acc': acc})
+
                     train_loss = 0
                     last_val_iter = iterations
       
