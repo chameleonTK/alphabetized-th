@@ -81,8 +81,6 @@ class BasicExperiment(Experiment):
         train_loss = 0
         start = time.time()
 
-        return model
-
         for epoch in range(args.epochs):
             train_iter.init_epoch()
             n_correct, n_total, train_loss = 0, 0, 0
