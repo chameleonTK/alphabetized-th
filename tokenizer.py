@@ -79,6 +79,10 @@ class Tokenizer(metaclass=Singleton):
         text = nltk.tokenize.word_tokenize(text)
         return text
 
+    def subwordEnTokenize(self, text, normalised=True):
+        sp = self.get_sentencepiece_model("en")
+        text = sp.encode(text, out_type=str)
+        return text
 
 
 if __name__ == "__main__":

@@ -62,9 +62,6 @@ class XLNIExperiment(Experiment):
 if __name__ == "__main__":
     
     tokenizer = tkn.Tokenizer()
-    # print(tokenizer.subwordTCCTokenize(s))
-    # print(tokenizer.subwordTokenize(s))
-
     wv = FastText.load(f"./wv/word_th_w2v.model")
     def fnt_tokenizer(text): # create a tokenizer function
         text = tokenizer.wordTokenize(text)
