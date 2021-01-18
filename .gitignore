@@ -1,0 +1,5 @@
+__pycache__
+datasets/**/*.txt
+datasets/**/*.csv
+datasets/**/*.jsonl
+datasets/**/*.tsv
