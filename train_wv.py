@@ -31,16 +31,17 @@ if __name__ == "__main__":
     else:
         device = torch.device("cpu")
 
-    # util = Util()
+    util = Util()
 
-    # k = "word_th"
-    # t = time()
-    # model = fasttext.train_unsupervised('datasets/Oscar/df_samples.txt', ws=5, minCount=5, minn=2, maxn=5, dim=300)
-    # model.save_model("wv/newwv.bin")
+    k = "word_th"
+    t = time()
+    model = fasttext.train_unsupervised('datasets/Oscar/df_samples.txt', ws=5, minCount=5, minn=2, maxn=5, dim=300)
+    model.save_model("wv/newwv.bin")
 
-    # print("==============")
-    # print("Train:", k)
-    # print('Time to build vocab: {} mins'.format(round((time() - t) / 60, 2)))
-    # print("vocab size:", len(model.words))
+    print("==============")
+    print("Train:", k)
+    print('Time to build vocab: {} mins'.format(round((time() - t) / 60, 2)))
+    print("vocab size:", len(model.words))
     
-    
+
+    model = fasttext.load_model("wv/newwv.bin")
