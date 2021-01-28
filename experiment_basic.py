@@ -81,6 +81,8 @@ class BasicExperiment(Experiment):
         train_loss = 0
         start = time.time()
 
+        return model
+
         for epoch in range(args.epochs):
             train_iter.init_epoch()
             n_correct, n_total, train_loss = 0, 0, 0
@@ -145,4 +147,4 @@ if __name__ == "__main__":
     newmodel = DAN.load_model("./models/demo.pt")
 
     
-    # print(newmodel, newmodel.fc2.weight, model.fc2.weight)
+    print(newmodel, newmodel.fc2.weight, model.fc2.weight)

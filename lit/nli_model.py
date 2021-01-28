@@ -6,7 +6,7 @@ import numpy as np
 class NLIModel(lit_model.Model):
   """Wrapper for a Natural Language Inference model."""
 
-  NLI_LABELS = ['entailment', 'neutral', 'contradiction']
+  NLI_LABELS = ['negative', 'neutral', 'positive']
 
   def __init__(self, model_path, **kw):
     # Load the model into memory so we're ready for interactive use.
