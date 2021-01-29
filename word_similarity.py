@@ -86,13 +86,13 @@ def fetch_thai_simlex999():
     return load_csv("datasets/word_similarity/thaiSimLex-999-v2.csv")
 
 def load_csv(path):
-    d = pd.read_csv(path, names=["w1", "w2", "score"]).head()
+    d = pd.read_csv(path, names=["w1", "w2", "score"])
     return {
         "X": d[["w1", "w2"]].values,
         "y": d["score"].values
     }
 
-def evaluate_similarity(wv, X, y, preprocess=None):
+def evaluate_similarity(wv, X, y, preprocess=None, output=None):
     """
     Calculate Spearman correlation between cosine similarity of the model
     and human rated similarity of word pairs
@@ -153,6 +153,14 @@ def evaluate_similarity(wv, X, y, preprocess=None):
     scores = np.array([v1.dot(v2.T)/(np.linalg.norm(v1)*np.linalg.norm(v2)) for v1, v2 in zip(A, B)])
 
 
+    if output is not None:
+        d = pd.DataFrame({
+            "w1": X[:, 0],
+            "w2": X[:, 1],
+            "predict": scores,
+            "actual": y
+        })
+        d.to_csv(output+".csv")
     # wohlg: original version only returned Spearman 
     # wohlg: we added Pearson and other information 
     result = {
@@ -166,6 +174,8 @@ def evaluate_similarity(wv, X, y, preprocess=None):
 
     return result
 
+
+import json
 
 if __name__ == "__main__":
     print("Word Similarity Evaluation")
@@ -185,7 +195,7 @@ if __name__ == "__main__":
     }
 
     
-
+    df = []
     # Print sample data
     for name, data in iteritems(tasks):
         print("Sample data from {}: pair \"{}\" and \"{}\" is assigned score {}".format(name, data["X"][0][0], data["X"][0][1], data["y"][0]))
@@ -193,7 +203,8 @@ if __name__ == "__main__":
     # Calculate results using helper function for the various word similarity datasets
     for name, data in iteritems(tasks):
         print("NEW TASK:", name)
-        result = evaluate_similarity(wv, data["X"], data["y"])
+        output = sys.argv[2] if len(sys.argv) > 2 else None
+        result = evaluate_similarity(wv, data["X"], data["y"], output=output+name)
 
         # hm = scipy.stats.hmean([result['spearmanr'], result['pearsonr']])
         perc_oov_words = 100 * (result['num_missing_words'] / (result['num_found_words'] + float(result['num_missing_words'])))
@@ -207,3 +218,7 @@ if __name__ == "__main__":
             perc_oov_words
         ))
         print("\n\n")
+        result["name"] = name 
+        df.append(result)
+
+    print(json.dumps(df))
