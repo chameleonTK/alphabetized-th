@@ -58,40 +58,45 @@ class XLNIExperiment(Experiment):
 
         return model
 
-    
+
+from gensim.models import KeyedVectors
+import sys
+
 if __name__ == "__main__":
     
+    print("XNLI Evaluation")
+    if len(sys.argv) > 1:
+        wvname = sys.argv[1]
+        print("Loading EN wv", wvname)
+        wven = KeyedVectors.load_word2vec_format(f"{wvname}/vectors-en.txt")
+
+        thcol = sys.argv[2] if len(sys.argv) > 1 else "th"
+        print("Loading TH wv", wvname, thcol)
+        wvth = KeyedVectors.load_word2vec_format(f"{wvname}/vectors-{thcol}.txt")
+        
+    else:
+        print("Please specify wordvector location")
+        sys.exit(0)
+
     tokenizer = tkn.Tokenizer()
-    wv = FastText.load(f"./wv/word_th_w2v.model")
-    def fnt_tokenizer(text): # create a tokenizer function
-        text = tokenizer.wordTokenize(text)
-        return text
+    
 
     exp = XLNIExperiment()
-    args = exp.get_default_arguments("demo")
-    args.epochs = 1
+    args = exp.get_default_arguments("XNLI")
+    args.epochs = 5
     args.dev_every = 10
+    model = exp.pretrain("word_en_th", args, wven, tokenizer.wordEnTokenize)
 
-    _cnt = 0
-    def _tokenizer(tok):
-      def t(text):
-          global _cnt
-          text = tok(text)
-          _cnt += 1
-          if _cnt <=5:
-            print(text)
-          return text
-      return t
-    
-    
-    _cnt = 0
-    model = exp.pretrain("word_en", args, wv.wv, _tokenizer(tokenizer.wordEnTokenize))
+    if thcol=="th":
+        thtokenizer = tokenizer.wordTokenize
+    else:
+        thtokenizer = tokenizer.wordTCCTokenize
 
-    _cnt = 0
-    model = exp.finetune("word_en", args, model, wv.wv, _tokenizer(tokenizer.wordTokenize))
+    model = exp.finetune("word_en_th", args, model, wvth, thtokenizer)
 
-    model.save_model("./models/demo.pt")
-    newmodel = DAN.load_model("./models/demo.pt")
+    saved_path = sys.argv[3] if len(sys.argv) > 2 else "./models/demo.pt"
+    model.save_model(saved_path)
+    # newmodel = DAN.load_model("./models/demo.pt")
 
     
     # print(newmodel, newmodel.fc2.weight, model.fc2.weight)
