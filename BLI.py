@@ -107,8 +107,8 @@ if __name__ == "__main__":
             aligned_model = sys.argv[1]
 
             thcol = sys.argv[2] if len(sys.argv) > 2 else "th"
-            wven = load_vectors(f"{aligned_model}vectors-en-norm.txt")
-            wvth = load_vectors(f"{aligned_model}vectors-{thcol}-norm.txt")
+            wven = load_vectors(f"{aligned_model}vectors-en.txt")
+            wvth = load_vectors(f"{aligned_model}vectors-{thcol}.txt")
 
             print("Loading ", aligned_model, thcol)
         else:
@@ -118,8 +118,8 @@ if __name__ == "__main__":
         util = Util()
         dictionary = load_dictionary()
 
-        dth = pd.read_csv("datasets/freq_words/freq_words_th_no_stopwords.tsv", sep="\t", names=["th", "en", "count"])
-        den = pd.read_csv("datasets/freq_words/freq_words_en_no_stopwords.tsv", sep="\t", names=["en", "th", "count"])
+        dth = pd.read_csv("datasets/lexicon-freq-words/freq_words_th_no_stopwords.tsv", sep="\t", names=["th", "en", "count"])
+        den = pd.read_csv("datasets/lexicon-freq-words/freq_words_en_no_stopwords.tsv", sep="\t", names=["en", "th", "count"])
         den["thtcc"] = den.th.apply(util.tcc_encode)
         dth["thtcc"] = dth.th.apply(util.tcc_encode)
 
@@ -127,7 +127,7 @@ if __name__ == "__main__":
         
         
         topk = 1000
-        p1 = eval_BLI(dth.head(topk), (thcol, "en"), wven, wvth)
+        p1 = eval_BLI(dth.head(topk), (thcol, "en"), wvth, wven)
         p2 = eval_BLI(den.head(topk), ("en", thcol), wven, wvth)
         print(p1)
         print(p2)

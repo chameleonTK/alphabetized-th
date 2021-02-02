@@ -3,19 +3,31 @@ from util import Util
 
 ### set data for building word vectors
 sents = []
-name = "../wiki/wiki"
-fout1 = open(f"{name}_word_th.txt", "w", encoding="utf-8")
-fout2 = open(f"{name}_word_th_tcc.txt", "w", encoding="utf-8")
+name = "../oscar/oscar"
 
 ntoken1, ntoken2 = 0, 0
 nsent = 0
 filenames = [
-    "../wiki/merged_wiki.txt",
+  "../oscar/text/th_part_1.txt",
+  "../oscar/text/th_part_2.txt",
+  "../oscar/text/th_part_3.txt",
+  "../oscar/text/th_part_4.txt",
+  "../oscar/text/th_part_5.txt",
+  "../oscar/text/th_part_6.txt",
+  "../oscar/text/th_part_7.txt",
+  "../oscar/text/th_part_8.txt",
+  "../oscar/text/th_part_9.txt",
 ]
 
 tokenizer = tkn.Tokenizer()
-
+idx = 0
 for filename in filenames:  
+  print(filename)
+  idx += 1
+  if idx in [3,4,5,6,7]:
+     continue
+  fout1 = open(f"{name}_word_th{idx}.txt", "w", encoding="utf-8")
+  fout2 = open(f"{name}_word_th_tcc{idx}.txt", "w", encoding="utf-8")
   with open(filename) as fin:
     for text in fin:
         #if len(text) > 2000:
@@ -42,8 +54,8 @@ for filename in filenames:
 
   print(f"DONE {filename}")
   print(nsent, ntoken1, ntoken2, len(str(ntoken1)))
+  fout1.close()
+  fout2.close()
 
 print("Number of Token", ntoken1, ntoken2)
 print("Number of Sentence", nsent)
-fout1.close()
-fout2.close()

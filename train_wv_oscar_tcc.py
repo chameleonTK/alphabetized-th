@@ -34,22 +34,21 @@ if __name__ == "__main__":
     util = Util()
 
     filenames = [
-        "../oscar/word_th/oscar_word_th1.txt",
-        "../oscar/word_th/oscar_word_th2.txt",
-        "../oscar/word_th/oscar_word_th3.txt",
-        "../oscar/word_th/oscar_word_th4.txt",
-        "../oscar/word_th/oscar_word_th5.txt",
-        #"../oscar/word_th/oscar_word_th6.txt",
-        #"../oscar/word_th/oscar_word_th7.txt",
-        #"../oscar/word_th/oscar_word_th8.txt",
-        #"../oscar/word_th/oscar_word_th9.txt",
+        "../oscar/word_th_tcc/oscar_word_th_tcc1.txt",
+        "../oscar/word_th_tcc/oscar_word_th_tcc2.txt",
+        "../oscar/word_th_tcc/oscar_word_th_tcc3.txt",
+        "../oscar/word_th_tcc/oscar_word_th_tcc4.txt",
+        "../oscar/word_th_tcc/oscar_word_th_tcc5.txt",
+        #"../oscar/word_th_tcc/oscar_word_th_tcc6.txt",
+        #"../oscar/word_th_tcc/oscar_word_th_tcc7.txt",
+        #"../oscar/word_th_tcc/oscar_word_th_tcc8.txt",
+        #"../oscar/word_th_tcc/oscar_word_th_tcc9.txt",
     ]
-
     
-    for i in [1,2,3,5]:
+    for i in [1, 2, 3, 5]:
 
         print("Loading text ",i)
-        tmp_filename = "_tmp_merged_text.txt"
+        tmp_filename = "_tmp_merged_text_tcc.txt"
         fo = open(tmp_filename, "w")
         nsent = 0
         done = False
@@ -71,10 +70,10 @@ if __name__ == "__main__":
         print("Loaded text")
         t = time()
         model = fasttext.train_unsupervised(tmp_filename, ws=5, minCount=5, minn=2, maxn=5, dim=300)
-        model.save_model(f"wv/oscar_word_th_{i}M.bin")
+        model.save_model(f"wv/oscar_word_th_tcc_{i}M.bin")
 
         print("==============")
-        print("Train:", f"oscar_word_th_{i}M")
+        print("Train:", f"oscar_word_th_tcc_{i}M")
         print("Number of sentences", nsent)
         print('Time to build vocab: {} mins'.format(round((time() - t) / 60, 2)))
         print("vocab size:", len(model.words))
