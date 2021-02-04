@@ -1,134 +1,111 @@
-from collections import defaultdict 
+# from collections import defaultdict 
 # from pythainlp import corpus
 # from nltk.corpus import stopwords as stopw_en
 # nltk.download('stopwords')
-import numpy as np, pandas as pd
+import numpy as np
 from tqdm import tqdm
-from util import Util
-from gensim.models import KeyedVectors
+# from util import Util
 
 import sys
 import io
-
-def load_dictionary():
-    dictionary = defaultdict(lambda: set())
-    with open("datasets/Yaitron/yaitron_par.tsv", encoding="utf-8") as fin:
-        for line in fin:
-            en, th = line.strip().split("\t")
-            
-            en = en.lower()
-            dictionary[en].add(th)
-            dictionary[th].add(en)
-
-def most_similar_index(word_src, word_trgs, src_embs, trg_metrix, trg_vocabs, verbose=False):
-    if word_src not in src_embs:
-        if verbose:
-            print("Word src not found in vocabulary: " + word_src)
-        return None
-
-    filtered_word_trg = []
-    for w in word_trgs:
-            if w in trg_vocabs:
-                    filtered_word_trg.append(w)
-    
-    if len(filtered_word_trg)==0:
-        if verbose:
-            print("Word trg not found in vocabulary: " + str(word_trgs))
-        return None
-    
-    word_src_emb = src_embs[word_src]
-    # sims = trg_embs.distances(word_src_emb)
-    sims = np.dot(trg_metrix, np.transpose(word_src_emb))
-    
-    inds = np.argsort(sims)
-    if verbose:
-        for idx in inds[0:5]:
-            print(trg_vocabs[idx])
-
-    idxs = []
-    for w in filtered_word_trg:
-        trg_ind = np.where(trg_vocabs == w)[0][0]
-        idx = np.where(inds == trg_ind)[0][0] + 1
-        idxs.append(idx)
-    return min(idxs)
-
-
-def eval_BLI(df, lang_keys, wv_src, wv_trg):
-    src, trg = lang_keys
-    vocabs_trg = np.array(list(wv_trg.keys()))
-    positions = []
-
-    matrix_trg = []
-    for w in vocabs_trg:
-        wemb = wv_trg[w]
-        if len(wemb)==0:
-                continue
-        matrix_trg.append(wemb)
-    matrix_trg = np.array(matrix_trg)
-
-    for index, row in tqdm(df.iterrows(), total=len(df)):
-        ws = row[src].split(",")
-        wt = row[trg].split(",")
-        
-        idx = most_similar_index(ws[0], wt, wv_src, matrix_trg, vocabs_trg)
-        positions.append(idx)
-    
-    
-    positions = list(filter(lambda x: x is not None, positions))
-    p1 = len([p for p in positions if p == 1]) / len(positions)
-    p5 = len([p for p in positions if p <= 5]) / len(positions)
-    p10 = len([p for p in positions if p <= 10]) / len(positions)
-    mrr = sum([1.0/p for p in positions]) / len(positions)
-
-
-    return {
-        "not_none": len(positions),
-        "P1": p1,
-        "P5": p5,
-        "P10": p10,
-        "MRR": mrr
-    }
-
+import torch
 
 def load_vectors(fname):
     fin = io.open(fname, 'r', encoding='utf-8', newline='\n', errors='ignore')
     n, d = map(int, fin.readline().split())
     data = {}
-    for line in fin:
-        tokens = line.rstrip().split(' ')
-        data[tokens[0]] = [float(n) for n in tokens[1:]]
+    with tqdm(total=n) as pbar:
+        for line in fin:
+            tokens = line.rstrip().split(' ')
+            data[tokens[0]] = [float(n) for n in tokens[1:]]
+            pbar.update(1)
     return data
 
+
+def load_dictionary(path, word2id1, word2id2):
+    pairs = []
+    not_found = 0
+    not_found1 = 0
+    not_found2 = 0
+    with io.open(path, 'r', encoding='utf-8') as f:
+        for index, line in enumerate(f):
+            assert line == line.lower()
+            parts = line.rstrip().split()
+            if len(parts) < 2:
+                print("Could not parse line %s (%i)", line, index)
+                continue
+            word1, word2 = parts
+            if word1 in word2id1 and word2 in word2id2:
+                pairs.append((word1, word2))
+            else:
+                not_found += 1
+                not_found1 += int(word1 not in word2id1)
+                not_found2 += int(word2 not in word2id2)
+    print("Found %i pairs of words in the dictionary (%i unique). "
+                "%i other pairs contained at least one unknown word "
+                "(%i in lang1, %i in lang2)"
+                % (len(pairs), len(set([x for x, _ in pairs])),
+                   not_found, not_found1, not_found2))
+    pairs = sorted(pairs, key=lambda x: word2id1[x[0]])
+    dico = torch.LongTensor(len(pairs), 2)
+    for i, (word1, word2) in enumerate(pairs):
+        dico[i, 0] = word2id1[word1]
+        dico[i, 1] = word2id2[word2]
+    return dico
+
 if __name__ == "__main__":
-        print("BLI Evaluation")
-        # stopwords_th = corpus.thai_stopwords()
-        # stopwords_en = set(stopw_en.words())
-        if len(sys.argv) > 1:
-            aligned_model = sys.argv[1]
+    print("BLI Evaluation")
+    # stopwords_th = corpus.thai_stopwords()
+    # stopwords_en = set(stopw_en.words())
+    if len(sys.argv) > 1:
+        aligned_model = sys.argv[1]
 
-            thcol = sys.argv[2] if len(sys.argv) > 2 else "th"
-            wven = load_vectors(f"{aligned_model}vectors-en.txt")
-            wvth = load_vectors(f"{aligned_model}vectors-{thcol}.txt")
+        thcol = sys.argv[2] if len(sys.argv) > 2 else "th"
+        wven = load_vectors(f"{aligned_model}vectors-en.txt")
+        wvth = load_vectors(f"{aligned_model}vectors-{thcol}.txt")
 
-            print("Loading ", aligned_model, thcol)
-        else:
-            print("Please specify wordvector")
-            sys.exit(0)
+        print("Loading ", aligned_model, thcol)
+    else:
+        print("Please specify wordvector")
+        sys.exit(0)
 
-        util = Util()
-        dictionary = load_dictionary()
+    word2id1 = {w:idx for idx, w in enumerate(wven.keys())}
+    word2id2 = {w:idx for idx, w in enumerate(wvth.keys())}
 
-        dth = pd.read_csv("datasets/lexicon-freq-words/freq_words_th_no_stopwords.tsv", sep="\t", names=["th", "en", "count"])
-        den = pd.read_csv("datasets/lexicon-freq-words/freq_words_en_no_stopwords.tsv", sep="\t", names=["en", "th", "count"])
-        den["thtcc"] = den.th.apply(util.tcc_encode)
-        dth["thtcc"] = dth.th.apply(util.tcc_encode)
-
+    lexicon_path = [
+        "datasets/lexicon-en-th/en-th.5000-6500.txt",
+        "datasets/lexicon-freq-words/en-th.txt"
+    ]
+    
+    for path in lexicon_path:
+        print("Path", path)
+        dico = load_dictionary(path, word2id1, word2id2)
+        dico = dico.cuda()
         
-        
-        
-        topk = 1000
-        p1 = eval_BLI(dth.head(topk), (thcol, "en"), wvth, wven)
-        p2 = eval_BLI(den.head(topk), ("en", thcol), wven, wvth)
-        print(p1)
-        print(p2)
-        
+        emb1 = torch.Tensor([wven[k] for k in wven]).cuda()
+        emb1_norm = emb1 / emb1.norm(2, 1, keepdim=True).expand_as(emb1)
+
+        emb2 = torch.Tensor([wvth[k] for k in wvth]).cuda()
+        emb2_norm = emb2 / emb2.norm(2, 1, keepdim=True).expand_as(emb2)
+
+        w0 = dico[:, 0]
+        query = emb1[w0]
+
+        scores = query.mm(emb2_norm.transpose(0, 1))
+        inds = scores.argsort(axis=1, descending=True)
+        w1 = dico[:, 1]
+
+        w1 = w1[:, None].expand_as(inds)
+        matched = (inds==w1)+0
+
+        p = torch.argmax(matched, axis=1)+1
+        mrr = torch.sum(1/p)/len(p)
+
+        p1 = (p==1).sum()/len(p)
+        p5 = (p<=5).sum()/len(p)
+        p10 = (p<=10).sum()/len(p)
+
+        print("MRR", mrr)
+        print("P@1", p1)
+        print("P@5", p5)
+        print("P@10", p10)
