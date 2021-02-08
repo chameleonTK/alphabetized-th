@@ -17,7 +17,7 @@ from torchtext import datasets
 import torchtext.vocab as vocab
 
 import wandb
-from tqdm import tqdm_notebook
+from tqdm import tqdm
 
 class Experiment:
     def __init__(self):
@@ -82,7 +82,7 @@ class Experiment:
 
         # ref: https://medium.com/@rohit_agrawal/using-fine-tuned-gensim-word2vec-embeddings-with-torchtext-and-pytorch-17eea2883cd
         word2vec_vectors = []
-        for token, idx in tqdm_notebook(vocabs):
+        for token, idx in tqdm(vocabs):
             if token in wv.vocab.keys():
                 word2vec_vectors.append(torch.FloatTensor(wv[token].copy()))
             else:

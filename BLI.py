@@ -29,12 +29,14 @@ def load_dictionary(path, word2id1, word2id2):
     not_found2 = 0
     with io.open(path, 'r', encoding='utf-8') as f:
         for index, line in enumerate(f):
-            assert line == line.lower()
+            line = line.lower()
             parts = line.rstrip().split()
             if len(parts) < 2:
                 print("Could not parse line %s (%i)", line, index)
                 continue
-            word1, word2 = parts
+            word1 = parts[0]
+            word2 = parts[1]
+
             if word1 in word2id1 and word2 in word2id2:
                 pairs.append((word1, word2))
             else:
@@ -73,19 +75,19 @@ if __name__ == "__main__":
     word2id2 = {w:idx for idx, w in enumerate(wvth.keys())}
 
     lexicon_path = [
-        "datasets/lexicon-en-th/en-th.5000-6500.txt",
-        "datasets/lexicon-freq-words/en-th.txt"
+        f"datasets/lexicon-en-th/en-{thcol}.5000-6500.txt",
+        # "datasets/lexicon-freq-words/en-th.txt"
     ]
     
     for path in lexicon_path:
         print("Path", path)
         dico = load_dictionary(path, word2id1, word2id2)
-        dico = dico.cuda()
+        dico = dico
         
-        emb1 = torch.Tensor([wven[k] for k in wven]).cuda()
+        emb1 = torch.Tensor([wven[k] for k in wven])
         emb1_norm = emb1 / emb1.norm(2, 1, keepdim=True).expand_as(emb1)
 
-        emb2 = torch.Tensor([wvth[k] for k in wvth]).cuda()
+        emb2 = torch.Tensor([wvth[k] for k in wvth])
         emb2_norm = emb2 / emb2.norm(2, 1, keepdim=True).expand_as(emb2)
 
         w0 = dico[:, 0]
