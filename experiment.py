@@ -71,19 +71,19 @@ class Experiment:
         return acc, loss
 
     def init_w2v_from_pretrained(self, wv, vocabs):
-        W2V_SIZE = wv.vector_size
         # W2V_WINDOW = wv.window
         W2V_WINDOW = 5
         # W2V_MIN_COUNT = wv.min_count
         W2V_MIN_COUNT = 5
 
-        words = wv.vocab.keys()
+        words = list(wv.keys())
         vocab_size = len(words)
+        W2V_SIZE = len(wv[words[0]])
 
         # ref: https://medium.com/@rohit_agrawal/using-fine-tuned-gensim-word2vec-embeddings-with-torchtext-and-pytorch-17eea2883cd
         word2vec_vectors = []
         for token, idx in tqdm(vocabs):
-            if token in wv.vocab.keys():
+            if token in words:
                 word2vec_vectors.append(torch.FloatTensor(wv[token].copy()))
             else:
                 word2vec_vectors.append(torch.zeros(W2V_SIZE))
@@ -101,8 +101,11 @@ class Experiment:
         
         # W2V_MIN_COUNT = wv.min_count
         W2V_MIN_COUNT = 5
-        W2V_SIZE = wv.vector_size
-        TEXT.build_vocab(train, test, min_freq=W2V_MIN_COUNT, )
+
+        words = list(wv.keys())
+        W2V_SIZE = len(wv[words[0]])
+
+        TEXT.build_vocab(train, test, min_freq=W2V_MIN_COUNT)
         vocabs = TEXT.vocab.stoi.items()
         word2vec_vectors = self.init_w2v_from_pretrained(wv, vocabs)
         TEXT.vocab.set_vectors(TEXT.vocab.stoi, word2vec_vectors, W2V_SIZE)

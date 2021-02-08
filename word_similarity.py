@@ -121,9 +121,16 @@ def evaluate_similarity(wv, X, y, preprocess=None, output=None):
     # For all words in the datasets, check if the are OOV? 
     # Indices of word-pairs with a OOV word are stored in word_pair_oov_indices
     
+    def do_nothing(x):
+      return x
+      
+    if preprocess is None:
+      preprocess = do_nothing
+
     nwords = 0
     for query in X:
         for query_word in query:
+            query_word = preprocess(query_word)
             if query_word not in words:
                 missing_words += 1
                 word_pair_oov_indices.append(index)
@@ -141,12 +148,6 @@ def evaluate_similarity(wv, X, y, preprocess=None, output=None):
     # A = np.vstack(w.get(word, mean_vector) for word in X[:, 0])
     # B = np.vstack(w.get(word, mean_vector) for word in X[:, 1])
     # scores = np.array([v1.dot(v2.T)/(np.linalg.norm(v1)*np.linalg.norm(v2)) for v1, v2 in zip(A, B)])
-
-    def do_nothing(x):
-      return x
-      
-    if preprocess is None:
-      preprocess = do_nothing
 
     A = np.vstack(wv.get_word_vector(preprocess(word)) for word in X[:, 0])
     B = np.vstack(wv.get_word_vector(preprocess(word)) for word in X[:, 1])
@@ -201,10 +202,11 @@ if __name__ == "__main__":
         print("Sample data from {}: pair \"{}\" and \"{}\" is assigned score {}".format(name, data["X"][0][0], data["X"][0][1], data["y"][0]))
 
     # Calculate results using helper function for the various word similarity datasets
+    util = Util()
     for name, data in iteritems(tasks):
         print("NEW TASK:", name)
         output = sys.argv[2] if len(sys.argv) > 2 else None
-        result = evaluate_similarity(wv, data["X"], data["y"], output=output+name)
+        result = evaluate_similarity(wv, data["X"], data["y"], output=output+name, preprocess=util.tcc_encode)
 
         # hm = scipy.stats.hmean([result['spearmanr'], result['pearsonr']])
         perc_oov_words = 100 * (result['num_missing_words'] / (result['num_found_words'] + float(result['num_missing_words'])))

@@ -13,6 +13,7 @@ from gensim.models import FastText
 import tokenizer as tkn
 
 from experiment import Experiment
+from util import load_vectors
 
 class XLNIExperiment(Experiment):
     def __init__(self):
@@ -59,7 +60,6 @@ class XLNIExperiment(Experiment):
         return model
 
 
-from gensim.models import KeyedVectors
 import sys
 
 import wandb
@@ -70,11 +70,11 @@ if __name__ == "__main__":
     if len(sys.argv) > 1:
         wvname = sys.argv[1]
         print("Loading EN wv", wvname)
-        wven = KeyedVectors.load_word2vec_format(f"{wvname}/vectors-en.txt")
+        wven = load_vectors(f"{wvname}/vectors-en.txt")
 
         thcol = sys.argv[2] if len(sys.argv) > 1 else "th"
         print("Loading TH wv", wvname, thcol)
-        wvth = KeyedVectors.load_word2vec_format(f"{wvname}/vectors-{thcol}.txt")
+        wvth = load_vectors(f"{wvname}/vectors-{thcol}.txt")
 
         
     else:
@@ -93,7 +93,7 @@ if __name__ == "__main__":
     args = exp.get_default_arguments("XNLI")
     args.epochs = 5
     args.dev_every = 10
-    model = exp.pretrain("word_en_th", args, wven, tokenizer.wordEnTokenize, log=log)
+    model = exp.pretrain("word_en_th", args, wven, tokenizer.wordEnTokenize, full_data=True, log=log)
 
     if thcol=="th":
         thtokenizer = tokenizer.wordTokenize

@@ -2,6 +2,8 @@
 # # เเ => แ etc
 import pythainlp
 import re
+from tqdm import tqdm
+import io
 
 class Singleton(type):
     _instances = {}
@@ -107,6 +109,16 @@ class Util(metaclass=Singleton):
                 s += ch
         return s
 
+def load_vectors(fname):
+    fin = io.open(fname, 'r', encoding='utf-8', newline='\n', errors='ignore')
+    n, d = map(int, fin.readline().split())
+    data = {}
+    with tqdm(total=n) as pbar:
+        for line in fin:
+            tokens = line.rstrip().split(' ')
+            data[tokens[0]] = [float(n) for n in tokens[1:]]
+            pbar.update(1)
+    return data
 
 if __name__ == "__main__":
     # execute only if run as a script
