@@ -62,6 +62,8 @@ class XLNIExperiment(Experiment):
 from gensim.models import KeyedVectors
 import sys
 
+import wandb
+
 if __name__ == "__main__":
     
     print("XNLI Evaluation")
@@ -73,10 +75,16 @@ if __name__ == "__main__":
         thcol = sys.argv[2] if len(sys.argv) > 1 else "th"
         print("Loading TH wv", wvname, thcol)
         wvth = KeyedVectors.load_word2vec_format(f"{wvname}/vectors-{thcol}.txt")
+
         
     else:
         print("Please specify wordvector location")
         sys.exit(0)
+
+    log = False
+    if len(sys.argv) > 2:     
+        wandb.init(project="DAN", name=sys.argv[3])
+        log = True
 
     tokenizer = tkn.Tokenizer()
     
@@ -85,17 +93,18 @@ if __name__ == "__main__":
     args = exp.get_default_arguments("XNLI")
     args.epochs = 5
     args.dev_every = 10
-    model = exp.pretrain("word_en_th", args, wven, tokenizer.wordEnTokenize)
+    model = exp.pretrain("word_en_th", args, wven, tokenizer.wordEnTokenize, log=log)
 
     if thcol=="th":
         thtokenizer = tokenizer.wordTokenize
     else:
         thtokenizer = tokenizer.wordTCCTokenize
 
-    model = exp.finetune("word_en_th", args, model, wvth, thtokenizer)
+    model = exp.finetune("word_en_th", args, model, wvth, thtokenizer, log=log)
 
-    saved_path = sys.argv[3] if len(sys.argv) > 2 else "./models/demo.pt"
-    model.save_model(saved_path)
+    if len(sys.argv) > 3:
+        saved_path = sys.argv[4] 
+        model.save_model(saved_path)
     # newmodel = DAN.load_model("./models/demo.pt")
 
     
