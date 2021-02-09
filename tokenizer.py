@@ -18,16 +18,16 @@ class Tokenizer(metaclass=Singleton):
 
         if key=="th":
             sp = spm.SentencePieceProcessor()
-            sp.Load("subword_tokenizers/subw10000.model")
+            sp.Load("spm/spm_word_5M.model")
             self._models[key] = sp
         elif key=="thtcc":
             sp = spm.SentencePieceProcessor()
-            sp.Load("subword_tokenizers/subw_tcc10000.model")
+            sp.Load("spm/spm_word_tcc_5M.model")
             self._models[key] = sp
-        elif key=="en":
-            sp = spm.SentencePieceProcessor()
-            sp.Load("subword_tokenizers/subw_en10000.model")
-            self._models[key] = sp
+        # elif key=="en":
+        #     sp = spm.SentencePieceProcessor()
+        #     sp.Load("subword_tokenizers/subw_en10000.model")
+        #     self._models[key] = sp
         else:
             raise Exception(f"Cann't load sentencepirce model: {key}")
 
@@ -41,8 +41,11 @@ class Tokenizer(metaclass=Singleton):
         if normalised:
             text = self.normalise(text)
         
+        text = self.util.to_zh(text)
         sp = self.get_sentencepiece_model("th")
         text = sp.encode(text, out_type=str)
+        text = self.util.to_th(" ".join(text)).split(" ")
+        
         return text
 
     def subwordTCCTokenize(self, text, normalised=True):
