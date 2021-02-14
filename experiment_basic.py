@@ -15,7 +15,7 @@ from experiment import Experiment
 import wandb
 import sys
 import fasttext
-
+import numpy as np
 
 class BasicExperiment(Experiment):
     def __init__(self):
@@ -83,8 +83,6 @@ class BasicExperiment(Experiment):
         train_loss = 0
         start = time.time()
 
-        return model
-
         for epoch in range(args.epochs):
             train_iter.init_epoch()
             n_correct, n_total, train_loss = 0, 0, 0
@@ -127,7 +125,7 @@ class BasicExperiment(Experiment):
 
                     train_loss = 0
                     last_val_iter = iterations
-        return model
+        return model, best_acc
 
 
 if __name__ == "__main__":
@@ -156,10 +154,16 @@ if __name__ == "__main__":
         raise Exception("Unknown mode")
 
     wv = fasttext.load_model(wvpath)
-    exp = BasicExperiment()
-    args = exp.get_default_arguments("demo")
-    args.epochs = 1
-    model = exp.train("demo", args, fnt_tokenizer, wv)
+
+    acc = []
+    for i in range(5):
+        exp = BasicExperiment()
+        args = exp.get_default_arguments("demo")
+        args.epochs = 1
+        model, best_acc = exp.train("demo", args, fnt_tokenizer, wv)
+
+        acc.append(best_acc)
+    print(np.mean(acc), np.std(acc))
     # model.save_model("./models/demo.pt")
 
     # newmodel = DAN.load_model("./models/demo.pt")
