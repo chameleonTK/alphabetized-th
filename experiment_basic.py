@@ -9,11 +9,13 @@ import time
 from tqdm import tqdm as tqdm_notebook
 import torch
 
-from gensim.models import FastText
 import tokenizer as tkn
 
 from experiment import Experiment
 import wandb
+import sys
+import fasttext
+
 
 class BasicExperiment(Experiment):
     def __init__(self):
@@ -34,11 +36,10 @@ class BasicExperiment(Experiment):
             skip_header=True,
             fields=[('norm_text', TEXT), ('label', LABEL)])
         
-        W2V_SIZE = wv.vector_size, 
-        W2V_WINDOW = wv.window
-        W2V_MIN_COUNT = wv.min_count
+        W2V_SIZE = len(wv[wv.words[0]]),
+        W2V_MIN_COUNT = 5
 
-        words = wv.wv.vocab.keys()
+        words = wv.words
         vocab_size = len(words)
 
         TEXT.build_vocab(train, test, min_freq=W2V_MIN_COUNT, )
@@ -50,6 +51,7 @@ class BasicExperiment(Experiment):
                 word2vec_vectors.append(torch.FloatTensor(wv[token].copy()))
             else:
                 word2vec_vectors.append(torch.zeros(W2V_SIZE))
+                words = list(wv.keys())
                 
         TEXT.vocab.set_vectors(TEXT.vocab.stoi, word2vec_vectors, W2V_SIZE[0])
 
@@ -127,24 +129,38 @@ class BasicExperiment(Experiment):
                     last_val_iter = iterations
         return model
 
+
 if __name__ == "__main__":
     
     tokenizer = tkn.Tokenizer()
     # print(tokenizer.subwordTCCTokenize(s))
     # print(tokenizer.subwordTokenize(s))
 
-    wv = FastText.load(f"./wv/word_th_w2v.model")
-    def fnt_tokenizer(text): # create a tokenizer function
-        text = tokenizer.wordTokenize(text)
-        return text
+    print("Arguments", sys.argv)
+    wvpath = sys.argv[1]
+    
+    mode = sys.argv[2] if len(sys.argv) > 1 else "word"
+    if mode=="word":
+        fnt_tokenizer = tokenizer.wordTokenize
+    elif mode=="wordtcc":
+        fnt_tokenizer = tokenizer.wordTCCTokenize
+    elif mode=="subword":
+        fnt_tokenizer = tokenizer.subwordTokenize
+    elif mode=="subwordtcc":
+        fnt_tokenizer = tokenizer.subwordTCCTokenize
+    elif mode=="char":
+        fnt_tokenizer = tokenizer.characterTokenize
+    elif mode=="chartcc":
+        fnt_tokenizer = tokenizer.characterTCCTokenize
+    else:
+        raise Exception("Unknown mode")
 
+    wv = fasttext.load_model(wvpath)
     exp = BasicExperiment()
     args = exp.get_default_arguments("demo")
     args.epochs = 1
     model = exp.train("demo", args, fnt_tokenizer, wv)
-    model.save_model("./models/demo.pt")
+    # model.save_model("./models/demo.pt")
 
-    newmodel = DAN.load_model("./models/demo.pt")
-
-    
-    print(newmodel, newmodel.fc2.weight, model.fc2.weight)
+    # newmodel = DAN.load_model("./models/demo.pt")
+    # print(newmodel, newmodel.fc2.weight, model.fc2.weight)
