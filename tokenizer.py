@@ -63,12 +63,14 @@ class Tokenizer(metaclass=Singleton):
     def characterTokenize(self, text, normalised=True):
         if normalised:
             text = self.normalise(text)
+        text = text.replace(" ", "_")
         return list(text)
     
     def characterTCCTokenize(self, text, normalised=True):
         if normalised:
             text = self.normalise(text)
         text = self.util.tcc_encode(text)
+        text = text.replace(" ", "_")
         return list(text)
 
     def wordTokenize(self, text, normalised=True):

@@ -66,24 +66,25 @@ import wandb
 
 if __name__ == "__main__":
     
-    print("XNLI Evaluation")
-    if len(sys.argv) > 1:
+  print("XNLI Evaluation")
+  if len(sys.argv) > 1:
         wvname = sys.argv[1]
         print("Loading EN wv", wvname)
-        wven = load_vectors(f"{wvname}/vectors-en.txt")
+        wven = load_vectors(f"{wvname}/vectors-en.txt", normalised=True)
 
         thcol = sys.argv[2] if len(sys.argv) > 1 else "th"
         print("Loading TH wv", wvname, thcol)
-        wvth = load_vectors(f"{wvname}/vectors-{thcol}.txt")
+        wvth = load_vectors(f"{wvname}/vectors-{thcol}.txt", normalised=True)
 
         
-    else:
+  else:
         print("Please specify wordvector location")
         sys.exit(0)
-
+    
+  for i in range(4, 11):
     log = False
     if len(sys.argv) > 2:     
-        wandb.init(project="DAN", name=sys.argv[3])
+        wandb.init(project="DANv4.1", name=sys.argv[3]+str(i))
         log = True
 
     tokenizer = tkn.Tokenizer()
@@ -93,18 +94,19 @@ if __name__ == "__main__":
     args = exp.get_default_arguments("XNLI")
     args.epochs = 5
     args.dev_every = 10
-    model = exp.pretrain("word_en_th", args, wven, tokenizer.wordEnTokenize, full_data=True, log=log)
+    model = exp.pretrain("word_en_th", args, wven, tokenizer.wordEnTokenize, log=log)
 
     if thcol=="th":
         thtokenizer = tokenizer.wordTokenize
     else:
         thtokenizer = tokenizer.wordTCCTokenize
 
+    args.epochs = 10
     model = exp.finetune("word_en_th", args, model, wvth, thtokenizer, log=log)
 
-    if len(sys.argv) > 3:
-        saved_path = sys.argv[4] 
-        model.save_model(saved_path)
+    #if len(sys.argv) > 3:
+    #    saved_path = sys.argv[4] 
+    #    model.save_model(saved_path)
     # newmodel = DAN.load_model("./models/demo.pt")
 
     

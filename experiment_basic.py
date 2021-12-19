@@ -39,7 +39,7 @@ class BasicExperiment(Experiment):
         W2V_SIZE = len(wv[wv.words[0]]),
         W2V_MIN_COUNT = 5
 
-        words = wv.words
+        words = set(wv.words)
         vocab_size = len(words)
 
         TEXT.build_vocab(train, test, min_freq=W2V_MIN_COUNT, )
@@ -47,11 +47,10 @@ class BasicExperiment(Experiment):
         # ref: https://medium.com/@rohit_agrawal/using-fine-tuned-gensim-word2vec-embeddings-with-torchtext-and-pytorch-17eea2883cd
         word2vec_vectors = []
         for token, idx in tqdm_notebook(TEXT.vocab.stoi.items()):
-            if token in wv.wv.vocab.keys():
+            if token in words:
                 word2vec_vectors.append(torch.FloatTensor(wv[token].copy()))
             else:
                 word2vec_vectors.append(torch.zeros(W2V_SIZE))
-                words = list(wv.keys())
                 
         TEXT.vocab.set_vectors(TEXT.vocab.stoi, word2vec_vectors, W2V_SIZE[0])
 
@@ -159,7 +158,8 @@ if __name__ == "__main__":
     for i in range(5):
         exp = BasicExperiment()
         args = exp.get_default_arguments("demo")
-        args.epochs = 1
+        args.epochs = 10
+        args.d_embed = 300                
         model, best_acc = exp.train("demo", args, fnt_tokenizer, wv)
 
         acc.append(best_acc)

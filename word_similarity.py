@@ -175,7 +175,7 @@ def evaluate_similarity(wv, X, y, preprocess=None, output=None):
 
     return result
 
-
+from util import Util
 import json
 
 if __name__ == "__main__":
@@ -205,8 +205,9 @@ if __name__ == "__main__":
     util = Util()
     for name, data in iteritems(tasks):
         print("NEW TASK:", name)
-        output = sys.argv[2] if len(sys.argv) > 2 else None
-        result = evaluate_similarity(wv, data["X"], data["y"], output=output+name, preprocess=util.tcc_encode)
+        output = sys.argv[2] if len(sys.argv) > 2 else "./"
+        #result = evaluate_similarity(wv, data["X"], data["y"], output=output+name, preprocess=util.tcc_encode)
+        result = evaluate_similarity(wv, data["X"], data["y"], output=output+name)
 
         # hm = scipy.stats.hmean([result['spearmanr'], result['pearsonr']])
         perc_oov_words = 100 * (result['num_missing_words'] / (result['num_found_words'] + float(result['num_missing_words'])))

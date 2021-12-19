@@ -1,0 +1,13 @@
+nohup: ignoring input
+/homes/pn004/.conda/envs/tkenv/lib/python3.7/site-packages/torchtext/data/field.py:150: UserWarning: Field class will be retired soon and moved to torchtext.legacy. Please see the most recent release notes for further information.
+  warnings.warn('{} class will be retired soon and moved to torchtext.legacy. Please see the most recent release notes for further information.'.format(self.__class__.__name__), UserWarning)
+/homes/pn004/.conda/envs/tkenv/lib/python3.7/site-packages/torchtext/data/example.py:68: UserWarning: Example class will be retired soon and moved to torchtext.legacy. Please see the most recent release notes for further information.
+  warnings.warn('Example class will be retired soon and moved to torchtext.legacy. Please see the most recent release notes for further information.', UserWarning)
+/homes/pn004/.conda/envs/tkenv/lib/python3.7/site-packages/torchtext/data/example.py:78: UserWarning: Example class will be retired soon and moved to torchtext.legacy. Please see the most recent release notes for further information.
+  warnings.warn('Example class will be retired soon and moved to torchtext.legacy. Please see the most recent release notes for further information.', UserWarning)
+  0%|          | 0/6065 [00:00<?, ?it/s] 41%|████      | 2463/6065 [00:00<00:00, 24628.50it/s] 80%|███████▉  | 4837/6065 [00:00<00:00, 24354.39it/s]100%|██████████| 6065/6065 [00:00<00:00, 24126.71it/s]
+/homes/pn004/.conda/envs/tkenv/lib/python3.7/site-packages/torchtext/data/iterator.py:48: UserWarning: BucketIterator class will be retired soon and moved to torchtext.legacy. Please see the most recent release notes for further information.
+  warnings.warn('{} class will be retired soon and moved to torchtext.legacy. Please see the most recent release notes for further information.'.format(self.__class__.__name__), UserWarning)
+/homes/pn004/.conda/envs/tkenv/lib/python3.7/site-packages/torchtext/data/batch.py:23: UserWarning: Batch class will be retired soon and moved to torchtext.legacy. Please see the most recent release notes for further information.
+  warnings.warn('{} class will be retired soon and moved to torchtext.legacy. Please see the most recent release notes for further information.'.format(self.__class__.__name__), UserWarning)
+  0%|          | 0/4791 [00:00<?, ?it/s] 92%|█████████▏| 4416/4791 [00:00<00:00, 44157.73it/s]100%|██████████| 4791/4791 [00:00<00:00, 43886.37it/s]

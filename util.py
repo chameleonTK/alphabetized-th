@@ -5,6 +5,7 @@ import re
 from tqdm import tqdm
 import io
 
+import numpy as np
 class Singleton(type):
     _instances = {}
     def __call__(cls, *args, **kwargs):
@@ -109,14 +110,19 @@ class Util(metaclass=Singleton):
                 s += ch
         return s
 
-def load_vectors(fname):
+def load_vectors(fname, normalised=False):
     fin = io.open(fname, 'r', encoding='utf-8', newline='\n', errors='ignore')
     n, d = map(int, fin.readline().split())
     data = {}
     with tqdm(total=n) as pbar:
         for line in fin:
             tokens = line.rstrip().split(' ')
-            data[tokens[0]] = [float(n) for n in tokens[1:]]
+            if normalised:
+                v = np.array([float(n) for n in tokens[1:]])
+                v = v / np.linalg.norm(v)
+                data[tokens[0]] = v
+            else:
+                data[tokens[0]] = [float(n) for n in tokens[1:]]
             pbar.update(1)
     return data
 

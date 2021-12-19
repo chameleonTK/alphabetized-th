@@ -1,10 +1,10 @@
-import torch
+#import torch
 import tokenizer as tkn
 from util import Util
 
 # from gensim.models import Word2Vec
 # from gensim.models import FastText
-import multiprocessing
+#import multiprocessing
 
 
 from time import time
@@ -24,13 +24,13 @@ import fasttext
 #             if len(sents) >= 1e3:
 #                 break
 #     return sents
-
+from tqdm import tqdm
 import sys
 if __name__ == "__main__":
-    if torch.cuda.is_available():    
-        device = torch.device("cuda")
-    else:
-        device = torch.device("cpu")
+    #if torch.cuda.is_available():    
+    #    device = torch.device("cuda")
+    #else:
+    #    device = torch.device("cpu")
 
     util = Util()
 
@@ -45,33 +45,36 @@ if __name__ == "__main__":
         #"/homes/pn004/raw_th/th_part_8.txt",
         #"/homes/pn004/raw_th/th_part_9.txt",
     ]
-
-    thcol = sys.argv[2] if len(sys.argv) > 1 else "th"
+    print(sys.argv)
+    thcol = sys.argv[1] if len(sys.argv) > 1 else "th"
 
     print("MODE", thcol)
 
     tokenizer = tkn.Tokenizer()
-    for i in [5, 10]:
+    for i in [5]:
 
         print("Loading text ",i)
         tmp_filename = f"_tmp_merged_text_{thcol}.txt"
         fo = open(tmp_filename, "w")
         nsent = 0
         done = False
+        pbar = tqdm(total=1e6*i)
         for fname in filenames:
             with open(fname) as fin:
                 for line in fin:
-                    print(line)
-                    print(tokenizer.subwordTokenize(line))
-                    print(tokenizer.subwordTCCTokenize(line))
-                    break
+                    #print(line)
+                    #print(tokenizer.subwordTokenize(line))
+                    #print(tokenizer.subwordTCCTokenize(line))
+                    #break
 
                     if thcol=="th":
                         line = tokenizer.subwordTokenize(line)
                     else:
                         line = tokenizer.subwordTCCTokenize(line)
-                    fo.write(line)
+                    line = " ".join(line)
+                    fo.write(line+"\n")
                     nsent += 1
+                    pbar.update(1)
 
                     if nsent > (1e6*i):
                         done = True
@@ -81,7 +84,6 @@ if __name__ == "__main__":
         fo.close()
 
         
-        break
         print("Loaded text")
         t = time()
         model = fasttext.train_unsupervised(tmp_filename, ws=5, minCount=5, minn=2, maxn=5, dim=300)
