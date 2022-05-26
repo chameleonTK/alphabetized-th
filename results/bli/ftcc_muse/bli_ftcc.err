@@ -1,4 +1,0 @@
-BLI Evaluation
-Loading  ../aligned_fbcc/ th
-{'not_none': 736, 'P1': 0.0, 'P5': 0.0, 'P10': 0.0, 'MRR': 1.0165891240467196e-05}
-{'not_none': 788, 'P1': 0.0, 'P5': 0.0, 'P10': 0.0, 'MRR': 8.56795810189065e-05}
