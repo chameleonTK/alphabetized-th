@@ -123,18 +123,18 @@ from flair.embeddings import StackedEmbeddings
 from flair.data import Sentence
 
 class WordVector:
-    def __init__(self, alphabetized, fwd=True, bkw=True):
+    def __init__(self, alphabetized, fwd=True, bkw=True, model_dir_prefix=""):
         model_dir_suffix = ""
         if alphabetized:
             model_dir_suffix = "_alph"
         
         embs = []
         if fwd:
-            flair_embedding_forward = FlairEmbeddings(f"./Models/fwdLM{model_dir_suffix}/best-lm.pt")
+            flair_embedding_forward = FlairEmbeddings(f"./Models/{model_dir_prefix}fwdLM{model_dir_suffix}/best-lm.pt")
             embs.append(flair_embedding_forward)
         
         if bkw:
-            flair_embedding_backward = FlairEmbeddings(f"./Models/bkwLM{model_dir_suffix}/best-lm.pt")
+            flair_embedding_backward = FlairEmbeddings(f"./Models/{model_dir_prefix}bkwLM{model_dir_suffix}/best-lm.pt")
             embs.append(flair_embedding_backward)
         
         self.alphabetized = alphabetized
@@ -151,12 +151,25 @@ class WordVector:
 
         for token in sentence:
             return token.embedding.cpu()
-print("\n=======")
-print("Alphabetized")
-wv = WordVector(alphabetized=True)
-wordsim = eval_word_sim(wv)
+
+# print("\n=======")
+
+# wv = WordVector(alphabetized=True)
+# wordsim = eval_word_sim(wv)
+
+# print("\n=======")
+# print("Baseline")
+# wv = WordVector(alphabetized=False)
+# wordsim = eval_word_sim(wv)
+
+
+for i in range(20):
+    print(f"Alphabetized {i+1}")
+    wv = WordVector(alphabetized=True, model_dir_prefix=f"20/{i+1}_")
+    wordsim = eval_word_sim(wv)
 
 print("\n=======")
-print("Baseline")
-wv = WordVector(alphabetized=False)
-wordsim = eval_word_sim(wv)
+for i in range(20):
+    print(f"Baseline {i+1}")
+    wv = WordVector(alphabetized=False, model_dir_prefix=f"20/{i+1}_")
+    wordsim = eval_word_sim(wv)

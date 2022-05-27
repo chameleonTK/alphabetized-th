@@ -16,32 +16,36 @@ from util import *
 
 import pickle
 
-with open(f'./Models/alphs_addition_tokens', 'rb') as f:
-    additionTokens = pickle.load(f)
-
-def custom_alphabetize(sent):
-    tokens = alphabetize(sent)
+def transform_reorder(sent, p, window=4):
+    random.seed(42)
+    tokens = list(sent)
     
-    newtokens = []
-    for t in tokens:
-        if len(t) > 1:
-            newtokens.append(additionTokens[t])
-        else:
-            newtokens.append(t)
-        if(len(newtokens[-1])!=1):
-            print(newtokens[-1])
-            print(newtokens[-1])
-            print(newtokens[-1])
+    for i, t in enumerate(tokens):
+        span = tokens[i:i+window]
+        if random.random() < p:
+            a = random.randint(0, window-1)
+            b = random.randint(0, window-1)
+            try:
+                _tmp = tokens[i+a]
+                tokens[i+a] = tokens[i+b]
+                tokens[i+b] = _tmp
+            except:
+                continue
+                
+    return tokens
 
-    return newtokens
+from flair.trainers.language_model_trainer import LanguageModelTrainer, TextCorpus, TextDataset
+import torch
+import logging
+log = logging.getLogger("flair")
+import random
 
-
-class MyTextDataset(TextDataset):
+class MyTextDatasetReOrder(TextDataset):
     def __init__(
         self,
         dataset,
         dictionary: Dictionary,
-        alphabetized: bool, 
+        p_reorder: float, 
         expand_vocab: bool = False,
         forward: bool = True,
         split_on_char: bool = True,
@@ -57,8 +61,7 @@ class MyTextDataset(TextDataset):
         self.expand_vocab = expand_vocab
         self.document_delimiter = document_delimiter
         self.shuffle = shuffle
-        
-        self.alphabetized = alphabetized
+        self.p_reorder = p_reorder
 
         self.files = []
 
@@ -70,12 +73,7 @@ class MyTextDataset(TextDataset):
         lines = []
         for d in self.dataset:
             sent = d["sent"]
-
-            if self.alphabetized:
-                chars = custom_alphabetize(sent)
-            else:
-                chars = list(sent)
-        
+            chars = transform_reorder(sent, p=self.p_reorder)
 #             l = chars
             l = chars + [self.document_delimiter]
             lines.append(l)
@@ -103,20 +101,20 @@ class MyTextCorpus(TextCorpus):
         self,
         datasets,
         dictionary: Dictionary,
-        alphabetized: bool,
+        p_reorder: float,
         forward: bool = True,
         character_level: bool = True,
     ):
         self.dictionary: Dictionary = dictionary
         self.forward = forward
         self.split_on_char = character_level
-        self.alphabetized = alphabetized
+        self.p_reorder = p_reorder
         
         
         self.random_case_flip = True
         self.expand_vocab = False
         self.document_delimiter = "\n"
-        self.shuffle = True
+        self.shuffle = False
         
         splitmaping = {
             "train": "train",
@@ -126,10 +124,10 @@ class MyTextCorpus(TextCorpus):
         
         for k in splitmaping:
             sp = splitmaping[k]
-            d = MyTextDataset(
+            d = MyTextDatasetReOrder(
                 datasets.datasets[sp],
                 dictionary,
-                alphabetized,
+                p_reorder = self.p_reorder,
                 forward = self.forward,
                 split_on_char = self.split_on_char,
                 expand_vocab = self.expand_vocab,
@@ -144,34 +142,27 @@ class MyTextCorpus(TextCorpus):
                 setattr(self, k, d[0])
             
 
-def train_model(maindataset, alphabetized, prefix):
+def train_model(maindataset, p_reorder, prefix):
     
-    if alphabetized:
-        dictionary = Dictionary.load_from_file('./Models/char_mappings_alph')
-    else:
-        dictionary = Dictionary.load_from_file('./Models/char_mappings')
+    dictionary = Dictionary.load_from_file('./Models/char_mappings')
     
     print("#Vocab:", len(dictionary.idx2item))
     
     # forward_lm
-    corpus = MyTextCorpus(maindataset, dictionary, alphabetized=alphabetized, forward=True)
+    corpus = MyTextCorpus(maindataset, dictionary, p_reorder=p_reorder, forward=True)
     language_model = LanguageModel(dictionary, True, hidden_size=128, nlayers=1)
     trainer = LanguageModelTrainer(language_model, corpus)
     epoch = 20
-    model_dir = f'./Models/{prefix}_fwdLM'
-    if alphabetized:
-        model_dir += "_alph"
+    model_dir = f'./Models/{prefix}_fwdLM_{p_reorder}'
         
     trainer.train(model_dir, sequence_length=280, mini_batch_size=128, max_epochs=epoch)
     
     # backward_lm
-    corpus = MyTextCorpus(maindataset, dictionary, alphabetized=alphabetized, forward=False)
+    corpus = MyTextCorpus(maindataset, dictionary, p_reorder=p_reorder, forward=False)
     language_model = LanguageModel(dictionary, False, hidden_size=128, nlayers=1)
     trainer = LanguageModelTrainer(language_model, corpus)
     
-    model_dir = f'./Models/{prefix}_bkwLM'
-    if alphabetized:
-        model_dir += "_alph"
+    model_dir = f'./Models/{prefix}_bkwLM_{p_reorder}'
         
     trainer.train(model_dir, sequence_length=280, mini_batch_size=128, max_epochs=epoch)
     
@@ -179,8 +170,7 @@ def train_model(maindataset, alphabetized, prefix):
 # maindataset = ThDatasetVISTEC("../Data/VISTEC-TP-TH-sample", name="VISTEC-sample")
 maindataset = ThDatasetVISTEC("../Data/VISTEC-TP-TH-2021", name="VISTEC")
 
-
-for i in range(20):    
-    train_model(maindataset, alphabetized=False, prefix=f"{(i+1)}")
-    train_model(maindataset, alphabetized=True, prefix=f"{(i+1)}")
+for i in range(5):
+    for p in range(1, 10):
+        train_model(maindataset, p_reorder=p/10.0, prefix=f"reorder/{(i+1)}")
 

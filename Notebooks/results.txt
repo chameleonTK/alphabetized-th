@@ -1,0 +1,202 @@
+Alphabetized 1
+Alphabetized 1:Dataset TH-WS353: Spearman: 0.060
+Alphabetized 1:Dataset TH-SemEval2017T2: Spearman: 0.191
+Alphabetized 1:Dataset TH-SimLex999: Spearman: 0.150
+Alphabetized 1:Dataset TWS65: Spearman: 0.202
+Alphabetized 2
+Alphabetized 2:Dataset TH-WS353: Spearman: 0.119
+Alphabetized 2:Dataset TH-SemEval2017T2: Spearman: 0.185
+Alphabetized 2:Dataset TH-SimLex999: Spearman: 0.176
+Alphabetized 2:Dataset TWS65: Spearman: 0.250
+Alphabetized 3
+Alphabetized 3:Dataset TH-WS353: Spearman: 0.159
+Alphabetized 3:Dataset TH-SemEval2017T2: Spearman: 0.181
+Alphabetized 3:Dataset TH-SimLex999: Spearman: 0.162
+Alphabetized 3:Dataset TWS65: Spearman: 0.137
+Alphabetized 4
+Alphabetized 4:Dataset TH-WS353: Spearman: 0.074
+Alphabetized 4:Dataset TH-SemEval2017T2: Spearman: 0.211
+Alphabetized 4:Dataset TH-SimLex999: Spearman: 0.158
+Alphabetized 4:Dataset TWS65: Spearman: 0.143
+Alphabetized 5
+Alphabetized 5:Dataset TH-WS353: Spearman: 0.210
+Alphabetized 5:Dataset TH-SemEval2017T2: Spearman: 0.218
+Alphabetized 5:Dataset TH-SimLex999: Spearman: 0.144
+Alphabetized 5:Dataset TWS65: Spearman: 0.168
+Alphabetized 6
+Alphabetized 6:Dataset TH-WS353: Spearman: 0.155
+Alphabetized 6:Dataset TH-SemEval2017T2: Spearman: 0.215
+Alphabetized 6:Dataset TH-SimLex999: Spearman: 0.140
+Alphabetized 6:Dataset TWS65: Spearman: 0.129
+Alphabetized 7
+Alphabetized 7:Dataset TH-WS353: Spearman: 0.197
+Alphabetized 7:Dataset TH-SemEval2017T2: Spearman: 0.154
+Alphabetized 7:Dataset TH-SimLex999: Spearman: 0.183
+Alphabetized 7:Dataset TWS65: Spearman: 0.171
+Alphabetized 8
+Alphabetized 8:Dataset TH-WS353: Spearman: 0.167
+Alphabetized 8:Dataset TH-SemEval2017T2: Spearman: 0.224
+Alphabetized 8:Dataset TH-SimLex999: Spearman: 0.175
+Alphabetized 8:Dataset TWS65: Spearman: 0.324
+Alphabetized 9
+Alphabetized 9:Dataset TH-WS353: Spearman: 0.203
+Alphabetized 9:Dataset TH-SemEval2017T2: Spearman: 0.255
+Alphabetized 9:Dataset TH-SimLex999: Spearman: 0.190
+Alphabetized 9:Dataset TWS65: Spearman: 0.157
+Alphabetized 10
+Alphabetized 10:Dataset TH-WS353: Spearman: 0.245
+Alphabetized 10:Dataset TH-SemEval2017T2: Spearman: 0.179
+Alphabetized 10:Dataset TH-SimLex999: Spearman: 0.148
+Alphabetized 10:Dataset TWS65: Spearman: 0.178
+Alphabetized 11
+Alphabetized 11:Dataset TH-WS353: Spearman: 0.120
+Alphabetized 11:Dataset TH-SemEval2017T2: Spearman: 0.211
+Alphabetized 11:Dataset TH-SimLex999: Spearman: 0.113
+Alphabetized 11:Dataset TWS65: Spearman: 0.130
+Alphabetized 12
+Alphabetized 12:Dataset TH-WS353: Spearman: 0.134
+Alphabetized 12:Dataset TH-SemEval2017T2: Spearman: 0.223
+Alphabetized 12:Dataset TH-SimLex999: Spearman: 0.177
+Alphabetized 12:Dataset TWS65: Spearman: 0.107
+Alphabetized 13
+Alphabetized 13:Dataset TH-WS353: Spearman: 0.180
+Alphabetized 13:Dataset TH-SemEval2017T2: Spearman: 0.219
+Alphabetized 13:Dataset TH-SimLex999: Spearman: 0.192
+Alphabetized 13:Dataset TWS65: Spearman: 0.159
+Alphabetized 14
+Alphabetized 14:Dataset TH-WS353: Spearman: 0.155
+Alphabetized 14:Dataset TH-SemEval2017T2: Spearman: 0.257
+Alphabetized 14:Dataset TH-SimLex999: Spearman: 0.170
+Alphabetized 14:Dataset TWS65: Spearman: 0.297
+Alphabetized 15
+Alphabetized 15:Dataset TH-WS353: Spearman: 0.155
+Alphabetized 15:Dataset TH-SemEval2017T2: Spearman: 0.236
+Alphabetized 15:Dataset TH-SimLex999: Spearman: 0.164
+Alphabetized 15:Dataset TWS65: Spearman: 0.115
+Alphabetized 16
+Alphabetized 16:Dataset TH-WS353: Spearman: 0.196
+Alphabetized 16:Dataset TH-SemEval2017T2: Spearman: 0.208
+Alphabetized 16:Dataset TH-SimLex999: Spearman: 0.154
+Alphabetized 16:Dataset TWS65: Spearman: 0.148
+Alphabetized 17
+Alphabetized 17:Dataset TH-WS353: Spearman: 0.119
+Alphabetized 17:Dataset TH-SemEval2017T2: Spearman: 0.194
+Alphabetized 17:Dataset TH-SimLex999: Spearman: 0.173
+Alphabetized 17:Dataset TWS65: Spearman: 0.180
+Alphabetized 18
+Alphabetized 18:Dataset TH-WS353: Spearman: 0.176
+Alphabetized 18:Dataset TH-SemEval2017T2: Spearman: 0.219
+Alphabetized 18:Dataset TH-SimLex999: Spearman: 0.165
+Alphabetized 18:Dataset TWS65: Spearman: 0.197
+Alphabetized 19
+Alphabetized 19:Dataset TH-WS353: Spearman: 0.120
+Alphabetized 19:Dataset TH-SemEval2017T2: Spearman: 0.265
+Alphabetized 19:Dataset TH-SimLex999: Spearman: 0.159
+Alphabetized 19:Dataset TWS65: Spearman: 0.085
+Alphabetized 20
+Alphabetized 20:Dataset TH-WS353: Spearman: 0.080
+Alphabetized 20:Dataset TH-SemEval2017T2: Spearman: 0.245
+Alphabetized 20:Dataset TH-SimLex999: Spearman: 0.151
+Alphabetized 20:Dataset TWS65: Spearman: 0.195
+
+=======
+Baseline 1
+Baseline 1:Dataset TH-WS353: Spearman: 0.142
+Baseline 1:Dataset TH-SemEval2017T2: Spearman: 0.236
+Baseline 1:Dataset TH-SimLex999: Spearman: 0.164
+Baseline 1:Dataset TWS65: Spearman: 0.162
+Baseline 2
+Baseline 2:Dataset TH-WS353: Spearman: 0.268
+Baseline 2:Dataset TH-SemEval2017T2: Spearman: 0.215
+Baseline 2:Dataset TH-SimLex999: Spearman: 0.154
+Baseline 2:Dataset TWS65: Spearman: 0.054
+Baseline 3
+Baseline 3:Dataset TH-WS353: Spearman: 0.175
+Baseline 3:Dataset TH-SemEval2017T2: Spearman: 0.201
+Baseline 3:Dataset TH-SimLex999: Spearman: 0.127
+Baseline 3:Dataset TWS65: Spearman: 0.047
+Baseline 4
+Baseline 4:Dataset TH-WS353: Spearman: 0.147
+Baseline 4:Dataset TH-SemEval2017T2: Spearman: 0.227
+Baseline 4:Dataset TH-SimLex999: Spearman: 0.143
+Baseline 4:Dataset TWS65: Spearman: 0.205
+Baseline 5
+Baseline 5:Dataset TH-WS353: Spearman: 0.189
+Baseline 5:Dataset TH-SemEval2017T2: Spearman: 0.243
+Baseline 5:Dataset TH-SimLex999: Spearman: 0.154
+Baseline 5:Dataset TWS65: Spearman: 0.060
+Baseline 6
+Baseline 6:Dataset TH-WS353: Spearman: 0.082
+Baseline 6:Dataset TH-SemEval2017T2: Spearman: 0.223
+Baseline 6:Dataset TH-SimLex999: Spearman: 0.140
+Baseline 6:Dataset TWS65: Spearman: 0.023
+Baseline 7
+Baseline 7:Dataset TH-WS353: Spearman: 0.166
+Baseline 7:Dataset TH-SemEval2017T2: Spearman: 0.180
+Baseline 7:Dataset TH-SimLex999: Spearman: 0.159
+Baseline 7:Dataset TWS65: Spearman: 0.037
+Baseline 8
+Baseline 8:Dataset TH-WS353: Spearman: 0.174
+Baseline 8:Dataset TH-SemEval2017T2: Spearman: 0.187
+Baseline 8:Dataset TH-SimLex999: Spearman: 0.159
+Baseline 8:Dataset TWS65: Spearman: 0.166
+Baseline 9
+Baseline 9:Dataset TH-WS353: Spearman: 0.209
+Baseline 9:Dataset TH-SemEval2017T2: Spearman: 0.201
+Baseline 9:Dataset TH-SimLex999: Spearman: 0.141
+Baseline 9:Dataset TWS65: Spearman: 0.186
+Baseline 10
+Baseline 10:Dataset TH-WS353: Spearman: 0.152
+Baseline 10:Dataset TH-SemEval2017T2: Spearman: 0.241
+Baseline 10:Dataset TH-SimLex999: Spearman: 0.133
+Baseline 10:Dataset TWS65: Spearman: 0.070
+Baseline 11
+Baseline 11:Dataset TH-WS353: Spearman: 0.166
+Baseline 11:Dataset TH-SemEval2017T2: Spearman: 0.199
+Baseline 11:Dataset TH-SimLex999: Spearman: 0.179
+Baseline 11:Dataset TWS65: Spearman: 0.097
+Baseline 12
+Baseline 12:Dataset TH-WS353: Spearman: 0.079
+Baseline 12:Dataset TH-SemEval2017T2: Spearman: 0.266
+Baseline 12:Dataset TH-SimLex999: Spearman: 0.171
+Baseline 12:Dataset TWS65: Spearman: 0.116
+Baseline 13
+Baseline 13:Dataset TH-WS353: Spearman: 0.124
+Baseline 13:Dataset TH-SemEval2017T2: Spearman: 0.222
+Baseline 13:Dataset TH-SimLex999: Spearman: 0.160
+Baseline 13:Dataset TWS65: Spearman: 0.139
+Baseline 14
+Baseline 14:Dataset TH-WS353: Spearman: 0.147
+Baseline 14:Dataset TH-SemEval2017T2: Spearman: 0.173
+Baseline 14:Dataset TH-SimLex999: Spearman: 0.166
+Baseline 14:Dataset TWS65: Spearman: 0.077
+Baseline 15
+Baseline 15:Dataset TH-WS353: Spearman: 0.194
+Baseline 15:Dataset TH-SemEval2017T2: Spearman: 0.209
+Baseline 15:Dataset TH-SimLex999: Spearman: 0.125
+Baseline 15:Dataset TWS65: Spearman: 0.107
+Baseline 16
+Baseline 16:Dataset TH-WS353: Spearman: 0.128
+Baseline 16:Dataset TH-SemEval2017T2: Spearman: 0.222
+Baseline 16:Dataset TH-SimLex999: Spearman: 0.178
+Baseline 16:Dataset TWS65: Spearman: 0.115
+Baseline 17
+Baseline 17:Dataset TH-WS353: Spearman: 0.164
+Baseline 17:Dataset TH-SemEval2017T2: Spearman: 0.229
+Baseline 17:Dataset TH-SimLex999: Spearman: 0.138
+Baseline 17:Dataset TWS65: Spearman: 0.129
+Baseline 18
+Baseline 18:Dataset TH-WS353: Spearman: 0.076
+Baseline 18:Dataset TH-SemEval2017T2: Spearman: 0.245
+Baseline 18:Dataset TH-SimLex999: Spearman: 0.148
+Baseline 18:Dataset TWS65: Spearman: 0.021
+Baseline 19
+Baseline 19:Dataset TH-WS353: Spearman: 0.174
+Baseline 19:Dataset TH-SemEval2017T2: Spearman: 0.212
+Baseline 19:Dataset TH-SimLex999: Spearman: 0.199
+Baseline 19:Dataset TWS65: Spearman: 0.155
+Baseline 20
+Baseline 20:Dataset TH-WS353: Spearman: 0.100
+Baseline 20:Dataset TH-SemEval2017T2: Spearman: 0.221
+Baseline 20:Dataset TH-SimLex999: Spearman: 0.178
+Baseline 20:Dataset TWS65: Spearman: 0.066
