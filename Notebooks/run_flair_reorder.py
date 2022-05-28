@@ -114,7 +114,7 @@ class MyTextCorpus(TextCorpus):
         self.random_case_flip = True
         self.expand_vocab = False
         self.document_delimiter = "\n"
-        self.shuffle = False
+        self.shuffle = True
         
         splitmaping = {
             "train": "train",
@@ -170,7 +170,7 @@ def train_model(maindataset, p_reorder, prefix):
 # maindataset = ThDatasetVISTEC("../Data/VISTEC-TP-TH-sample", name="VISTEC-sample")
 maindataset = ThDatasetVISTEC("../Data/VISTEC-TP-TH-2021", name="VISTEC")
 
-for i in range(5):
+for i in range(1, 5):
     for p in range(1, 10):
         train_model(maindataset, p_reorder=p/10.0, prefix=f"reorder/{(i+1)}")
 

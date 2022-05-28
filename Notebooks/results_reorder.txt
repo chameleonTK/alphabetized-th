@@ -1,0 +1,229 @@
+Sample data from TH-WS353: pair "ความรัก" and "เพศ" is assigned score 12.2
+Sample data from TH-SemEval2017T2: pair "จูล" and "ยานอวกาศ" is assigned score 1.9
+Sample data from TH-SimLex999: pair "เก่า" and "ใหม่" is assigned score 4.38
+Sample data from TWS65: pair "แก้ว" and "ข้ารับใช้" is assigned score 0.116
+Reorder 1
+Reorder 1:0.1::Dataset TH-WS353: Spearman: 0.131
+Reorder 1:0.1::Dataset TH-SemEval2017T2: Spearman: 0.263
+Reorder 1:0.1::Dataset TH-SimLex999: Spearman: 0.193
+Reorder 1:0.1::Dataset TWS65: Spearman: 0.026
+Reorder 1
+Reorder 1:0.2::Dataset TH-WS353: Spearman: 0.135
+Reorder 1:0.2::Dataset TH-SemEval2017T2: Spearman: 0.296
+Reorder 1:0.2::Dataset TH-SimLex999: Spearman: 0.212
+Reorder 1:0.2::Dataset TWS65: Spearman: 0.107
+Reorder 1
+Reorder 1:0.3::Dataset TH-WS353: Spearman: 0.244
+Reorder 1:0.3::Dataset TH-SemEval2017T2: Spearman: 0.328
+Reorder 1:0.3::Dataset TH-SimLex999: Spearman: 0.206
+Reorder 1:0.3::Dataset TWS65: Spearman: 0.051
+Reorder 1
+Reorder 1:0.4::Dataset TH-WS353: Spearman: 0.223
+Reorder 1:0.4::Dataset TH-SemEval2017T2: Spearman: 0.339
+Reorder 1:0.4::Dataset TH-SimLex999: Spearman: 0.229
+Reorder 1:0.4::Dataset TWS65: Spearman: 0.098
+Reorder 1
+Reorder 1:0.5::Dataset TH-WS353: Spearman: 0.203
+Reorder 1:0.5::Dataset TH-SemEval2017T2: Spearman: 0.383
+Reorder 1:0.5::Dataset TH-SimLex999: Spearman: 0.243
+Reorder 1:0.5::Dataset TWS65: Spearman: 0.069
+Reorder 1
+Reorder 1:0.6::Dataset TH-WS353: Spearman: 0.248
+Reorder 1:0.6::Dataset TH-SemEval2017T2: Spearman: 0.369
+Reorder 1:0.6::Dataset TH-SimLex999: Spearman: 0.267
+Reorder 1:0.6::Dataset TWS65: Spearman: 0.067
+Reorder 1
+Reorder 1:0.7::Dataset TH-WS353: Spearman: 0.220
+Reorder 1:0.7::Dataset TH-SemEval2017T2: Spearman: 0.337
+Reorder 1:0.7::Dataset TH-SimLex999: Spearman: 0.267
+Reorder 1:0.7::Dataset TWS65: Spearman: 0.094
+Reorder 1
+Reorder 1:0.8::Dataset TH-WS353: Spearman: 0.237
+Reorder 1:0.8::Dataset TH-SemEval2017T2: Spearman: 0.325
+Reorder 1:0.8::Dataset TH-SimLex999: Spearman: 0.278
+Reorder 1:0.8::Dataset TWS65: Spearman: 0.125
+Reorder 1
+Reorder 1:0.9::Dataset TH-WS353: Spearman: 0.173
+Reorder 1:0.9::Dataset TH-SemEval2017T2: Spearman: 0.294
+Reorder 1:0.9::Dataset TH-SimLex999: Spearman: 0.233
+Reorder 1:0.9::Dataset TWS65: Spearman: 0.167
+Reorder 2
+Reorder 2:0.1::Dataset TH-WS353: Spearman: 0.122
+Reorder 2:0.1::Dataset TH-SemEval2017T2: Spearman: 0.295
+Reorder 2:0.1::Dataset TH-SimLex999: Spearman: 0.200
+Reorder 2:0.1::Dataset TWS65: Spearman: 0.003
+Reorder 2
+Reorder 2:0.2::Dataset TH-WS353: Spearman: 0.182
+Reorder 2:0.2::Dataset TH-SemEval2017T2: Spearman: 0.328
+Reorder 2:0.2::Dataset TH-SimLex999: Spearman: 0.209
+Reorder 2:0.2::Dataset TWS65: Spearman: 0.051
+Reorder 2
+Reorder 2:0.3::Dataset TH-WS353: Spearman: 0.175
+Reorder 2:0.3::Dataset TH-SemEval2017T2: Spearman: 0.343
+Reorder 2:0.3::Dataset TH-SimLex999: Spearman: 0.213
+Reorder 2:0.3::Dataset TWS65: Spearman: 0.016
+Reorder 2
+Reorder 2:0.4::Dataset TH-WS353: Spearman: 0.156
+Reorder 2:0.4::Dataset TH-SemEval2017T2: Spearman: 0.328
+Reorder 2:0.4::Dataset TH-SimLex999: Spearman: 0.234
+Reorder 2:0.4::Dataset TWS65: Spearman: 0.046
+Reorder 2
+Reorder 2:0.5::Dataset TH-WS353: Spearman: 0.187
+Reorder 2:0.5::Dataset TH-SemEval2017T2: Spearman: 0.344
+Reorder 2:0.5::Dataset TH-SimLex999: Spearman: 0.246
+Reorder 2:0.5::Dataset TWS65: Spearman: -0.004
+Reorder 2
+Reorder 2:0.6::Dataset TH-WS353: Spearman: 0.225
+Reorder 2:0.6::Dataset TH-SemEval2017T2: Spearman: 0.372
+Reorder 2:0.6::Dataset TH-SimLex999: Spearman: 0.249
+Reorder 2:0.6::Dataset TWS65: Spearman: 0.164
+Reorder 2
+Reorder 2:0.7::Dataset TH-WS353: Spearman: 0.199
+Reorder 2:0.7::Dataset TH-SemEval2017T2: Spearman: 0.317
+Reorder 2:0.7::Dataset TH-SimLex999: Spearman: 0.252
+Reorder 2:0.7::Dataset TWS65: Spearman: 0.160
+Reorder 2
+Reorder 2:0.8::Dataset TH-WS353: Spearman: 0.235
+Reorder 2:0.8::Dataset TH-SemEval2017T2: Spearman: 0.316
+Reorder 2:0.8::Dataset TH-SimLex999: Spearman: 0.228
+Reorder 2:0.8::Dataset TWS65: Spearman: 0.155
+Reorder 2
+Reorder 2:0.9::Dataset TH-WS353: Spearman: 0.198
+Reorder 2:0.9::Dataset TH-SemEval2017T2: Spearman: 0.314
+Reorder 2:0.9::Dataset TH-SimLex999: Spearman: 0.251
+Reorder 2:0.9::Dataset TWS65: Spearman: 0.157
+Reorder 3
+Reorder 3:0.1::Dataset TH-WS353: Spearman: 0.202
+Reorder 3:0.1::Dataset TH-SemEval2017T2: Spearman: 0.281
+Reorder 3:0.1::Dataset TH-SimLex999: Spearman: 0.216
+Reorder 3:0.1::Dataset TWS65: Spearman: -0.003
+Reorder 3
+Reorder 3:0.2::Dataset TH-WS353: Spearman: 0.175
+Reorder 3:0.2::Dataset TH-SemEval2017T2: Spearman: 0.288
+Reorder 3:0.2::Dataset TH-SimLex999: Spearman: 0.222
+Reorder 3:0.2::Dataset TWS65: Spearman: -0.002
+Reorder 3
+Reorder 3:0.3::Dataset TH-WS353: Spearman: 0.165
+Reorder 3:0.3::Dataset TH-SemEval2017T2: Spearman: 0.312
+Reorder 3:0.3::Dataset TH-SimLex999: Spearman: 0.195
+Reorder 3:0.3::Dataset TWS65: Spearman: 0.136
+Reorder 3
+Reorder 3:0.4::Dataset TH-WS353: Spearman: 0.215
+Reorder 3:0.4::Dataset TH-SemEval2017T2: Spearman: 0.333
+Reorder 3:0.4::Dataset TH-SimLex999: Spearman: 0.261
+Reorder 3:0.4::Dataset TWS65: Spearman: -0.015
+Reorder 3
+Reorder 3:0.5::Dataset TH-WS353: Spearman: 0.182
+Reorder 3:0.5::Dataset TH-SemEval2017T2: Spearman: 0.371
+Reorder 3:0.5::Dataset TH-SimLex999: Spearman: 0.255
+Reorder 3:0.5::Dataset TWS65: Spearman: 0.092
+Reorder 3
+Reorder 3:0.6::Dataset TH-WS353: Spearman: 0.242
+Reorder 3:0.6::Dataset TH-SemEval2017T2: Spearman: 0.356
+Reorder 3:0.6::Dataset TH-SimLex999: Spearman: 0.270
+Reorder 3:0.6::Dataset TWS65: Spearman: 0.117
+Reorder 3
+Reorder 3:0.7::Dataset TH-WS353: Spearman: 0.228
+Reorder 3:0.7::Dataset TH-SemEval2017T2: Spearman: 0.304
+Reorder 3:0.7::Dataset TH-SimLex999: Spearman: 0.283
+Reorder 3:0.7::Dataset TWS65: Spearman: 0.126
+Reorder 3
+Reorder 3:0.8::Dataset TH-WS353: Spearman: 0.181
+Reorder 3:0.8::Dataset TH-SemEval2017T2: Spearman: 0.345
+Reorder 3:0.8::Dataset TH-SimLex999: Spearman: 0.242
+Reorder 3:0.8::Dataset TWS65: Spearman: 0.286
+Reorder 3
+Reorder 3:0.9::Dataset TH-WS353: Spearman: 0.186
+Reorder 3:0.9::Dataset TH-SemEval2017T2: Spearman: 0.297
+Reorder 3:0.9::Dataset TH-SimLex999: Spearman: 0.266
+Reorder 3:0.9::Dataset TWS65: Spearman: 0.104
+Reorder 4
+Reorder 4:0.1::Dataset TH-WS353: Spearman: 0.158
+Reorder 4:0.1::Dataset TH-SemEval2017T2: Spearman: 0.281
+Reorder 4:0.1::Dataset TH-SimLex999: Spearman: 0.174
+Reorder 4:0.1::Dataset TWS65: Spearman: 0.080
+Reorder 4
+Reorder 4:0.2::Dataset TH-WS353: Spearman: 0.184
+Reorder 4:0.2::Dataset TH-SemEval2017T2: Spearman: 0.307
+Reorder 4:0.2::Dataset TH-SimLex999: Spearman: 0.200
+Reorder 4:0.2::Dataset TWS65: Spearman: -0.003
+Reorder 4
+Reorder 4:0.3::Dataset TH-WS353: Spearman: 0.196
+Reorder 4:0.3::Dataset TH-SemEval2017T2: Spearman: 0.314
+Reorder 4:0.3::Dataset TH-SimLex999: Spearman: 0.240
+Reorder 4:0.3::Dataset TWS65: Spearman: 0.117
+Reorder 4
+Reorder 4:0.4::Dataset TH-WS353: Spearman: 0.220
+Reorder 4:0.4::Dataset TH-SemEval2017T2: Spearman: 0.352
+Reorder 4:0.4::Dataset TH-SimLex999: Spearman: 0.227
+Reorder 4:0.4::Dataset TWS65: Spearman: 0.003
+Reorder 4
+Reorder 4:0.5::Dataset TH-WS353: Spearman: 0.175
+Reorder 4:0.5::Dataset TH-SemEval2017T2: Spearman: 0.344
+Reorder 4:0.5::Dataset TH-SimLex999: Spearman: 0.252
+Reorder 4:0.5::Dataset TWS65: Spearman: 0.134
+Reorder 4
+Reorder 4:0.6::Dataset TH-WS353: Spearman: 0.219
+Reorder 4:0.6::Dataset TH-SemEval2017T2: Spearman: 0.365
+Reorder 4:0.6::Dataset TH-SimLex999: Spearman: 0.248
+Reorder 4:0.6::Dataset TWS65: Spearman: 0.095
+Reorder 4
+Reorder 4:0.7::Dataset TH-WS353: Spearman: 0.271
+Reorder 4:0.7::Dataset TH-SemEval2017T2: Spearman: 0.319
+Reorder 4:0.7::Dataset TH-SimLex999: Spearman: 0.264
+Reorder 4:0.7::Dataset TWS65: Spearman: 0.081
+Reorder 4
+Reorder 4:0.8::Dataset TH-WS353: Spearman: 0.236
+Reorder 4:0.8::Dataset TH-SemEval2017T2: Spearman: 0.315
+Reorder 4:0.8::Dataset TH-SimLex999: Spearman: 0.253
+Reorder 4:0.8::Dataset TWS65: Spearman: 0.130
+Reorder 4
+Reorder 4:0.9::Dataset TH-WS353: Spearman: 0.199
+Reorder 4:0.9::Dataset TH-SemEval2017T2: Spearman: 0.284
+Reorder 4:0.9::Dataset TH-SimLex999: Spearman: 0.255
+Reorder 4:0.9::Dataset TWS65: Spearman: 0.151
+Reorder 5
+Reorder 5:0.1::Dataset TH-WS353: Spearman: 0.159
+Reorder 5:0.1::Dataset TH-SemEval2017T2: Spearman: 0.244
+Reorder 5:0.1::Dataset TH-SimLex999: Spearman: 0.156
+Reorder 5:0.1::Dataset TWS65: Spearman: -0.011
+Reorder 5
+Reorder 5:0.2::Dataset TH-WS353: Spearman: 0.132
+Reorder 5:0.2::Dataset TH-SemEval2017T2: Spearman: 0.290
+Reorder 5:0.2::Dataset TH-SimLex999: Spearman: 0.192
+Reorder 5:0.2::Dataset TWS65: Spearman: 0.050
+Reorder 5
+Reorder 5:0.3::Dataset TH-WS353: Spearman: 0.177
+Reorder 5:0.3::Dataset TH-SemEval2017T2: Spearman: 0.329
+Reorder 5:0.3::Dataset TH-SimLex999: Spearman: 0.238
+Reorder 5:0.3::Dataset TWS65: Spearman: 0.099
+Reorder 5
+Reorder 5:0.4::Dataset TH-WS353: Spearman: 0.218
+Reorder 5:0.4::Dataset TH-SemEval2017T2: Spearman: 0.360
+Reorder 5:0.4::Dataset TH-SimLex999: Spearman: 0.258
+Reorder 5:0.4::Dataset TWS65: Spearman: 0.101
+Reorder 5
+Reorder 5:0.5::Dataset TH-WS353: Spearman: 0.157
+Reorder 5:0.5::Dataset TH-SemEval2017T2: Spearman: 0.318
+Reorder 5:0.5::Dataset TH-SimLex999: Spearman: 0.273
+Reorder 5:0.5::Dataset TWS65: Spearman: 0.095
+Reorder 5
+Reorder 5:0.6::Dataset TH-WS353: Spearman: 0.223
+Reorder 5:0.6::Dataset TH-SemEval2017T2: Spearman: 0.372
+Reorder 5:0.6::Dataset TH-SimLex999: Spearman: 0.280
+Reorder 5:0.6::Dataset TWS65: Spearman: 0.028
+Reorder 5
+Reorder 5:0.7::Dataset TH-WS353: Spearman: 0.207
+Reorder 5:0.7::Dataset TH-SemEval2017T2: Spearman: 0.314
+Reorder 5:0.7::Dataset TH-SimLex999: Spearman: 0.251
+Reorder 5:0.7::Dataset TWS65: Spearman: 0.173
+Reorder 5
+Reorder 5:0.8::Dataset TH-WS353: Spearman: 0.230
+Reorder 5:0.8::Dataset TH-SemEval2017T2: Spearman: 0.290
+Reorder 5:0.8::Dataset TH-SimLex999: Spearman: 0.245
+Reorder 5:0.8::Dataset TWS65: Spearman: 0.130
+Reorder 5
+Reorder 5:0.9::Dataset TH-WS353: Spearman: 0.180
+Reorder 5:0.9::Dataset TH-SemEval2017T2: Spearman: 0.328
+Reorder 5:0.9::Dataset TH-SimLex999: Spearman: 0.266
+Reorder 5:0.9::Dataset TWS65: Spearman: 0.230
